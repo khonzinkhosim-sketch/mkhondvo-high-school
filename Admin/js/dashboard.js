@@ -269,9 +269,15 @@ function showApplicantDetails(application) {
         application["Student Name"]
     );
 
+    const dateOfBirth =
+        application["Date of Birth"] ||
+        application["DOB"] ||
+        application["Date of birth"] ||
+        "";
+
     setText(
         "detailDOB",
-        application["Date of Birth"]
+        dateOfBirth
     );
 
     setText(
