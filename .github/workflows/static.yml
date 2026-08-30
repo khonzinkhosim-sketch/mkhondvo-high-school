@@ -33,7 +33,7 @@ jobs:
         run: |
           mkdir -p _site
           cp -r frontend/* _site/
-          cp -r admin _site/admin
+          cp -r Admin _site/admin
 
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
