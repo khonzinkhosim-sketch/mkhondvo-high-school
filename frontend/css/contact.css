@@ -1,0 +1,173 @@
+﻿*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#f5f7fa;
+}
+
+header{
+background:#003366;
+color:white;
+padding:15px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.logo img{
+width:70px;
+height:70px;
+background:white;
+border-radius:50%;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:20px;
+flex-wrap:wrap;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+}
+
+nav a:hover,
+.active{
+color:gold;
+}
+
+.hero{
+background:#00509d;
+color:white;
+text-align:center;
+padding:70px 20px;
+}
+
+.hero h1{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.contact-container{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+padding:60px 8%;
+}
+
+.contact-info,
+.contact-form{
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.contact-info h2,
+.contact-form h2{
+color:#003366;
+margin-bottom:20px;
+}
+
+.contact-info p{
+margin-bottom:15px;
+line-height:1.8;
+}
+
+.contact-form input,
+.contact-form textarea{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+.contact-form button{
+background:#00509d;
+color:white;
+padding:15px 30px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+.contact-form button:hover{
+background:#003366;
+}
+
+.map{
+padding:0 8% 60px;
+text-align:center;
+}
+
+.map h2{
+color:#003366;
+margin-bottom:20px;
+}
+
+.map-placeholder{
+background:#e6e6e6;
+height:350px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:15px;
+font-size:20px;
+color:#555;
+}
+
+footer{
+background:#003366;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+gap:20px;
+}
+
+nav ul{
+justify-content:center;
+}
+
+.contact-container{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:34px;
+}
+
+}.map-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.map-container iframe {
+    display: block;
+    width: 100%;
+    height: 450px;
+    border: 0;
+}

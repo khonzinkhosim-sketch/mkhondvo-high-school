@@ -1,0 +1,991 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Mkhondvo High School</title>
+
+    <!-- ADMIN CSS -->
+
+	<link href="css/dashboard.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+
+                <img
+                    src="images/logo.jpg"
+                    alt="Mkhondvo High School Logo">
+
+                <div>
+
+                    <h2>Mkhondvo High School</h2>
+
+                    <span>Administration</span>
+
+                </div>
+
+            </div>
+
+
+            <nav class="admin-nav">
+
+                <a href="#" class="nav-link active">
+                    📊 Dashboard
+                </a>
+
+                <a href="#applications" class="nav-link">
+                    📋 Applications
+                </a>
+
+                <a href="#messages" class="nav-link">
+                    📩 Messages
+                 <span id="newMessagesBadge" class="message-badge">0</span>
+                </a>
+
+                <a href="#pending" class="nav-link">
+                    🕐 Pending
+                </a>
+
+                <a href="#approved" class="nav-link">
+                    ✅ Approved
+                </a>
+
+                <a href="#rejected" class="nav-link">
+                    ❌ Rejected
+                </a>
+
+                <a href="#settings" class="nav-link">
+                    ⚙️ Settings
+                </a>
+
+            </nav>
+
+
+            <button
+                id="logoutButton"
+                class="logout-button">
+
+                🚪 Logout
+
+            </button>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="admin-main">
+
+
+            <!-- TOP BAR -->
+
+            <header class="admin-topbar">
+
+                <div>
+
+                    <h1>Dashboard</h1>
+
+                    <p>
+                        Mkhondvo High School Administration
+                    </p>
+
+                </div>
+
+
+                <div class="admin-user">
+
+                    <div class="user-icon">
+                        👤
+                    </div>
+
+                    <div>
+
+                        <strong>Administrator</strong>
+
+                        <span>School Staff</span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- STATISTICS -->
+
+            <section class="statistics-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📋
+                    </div>
+
+                    <div>
+
+                        <span>Total Applications</span>
+
+                        <strong id="totalApplications">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card pending-card">
+
+                    <div class="stat-icon">
+                        🕐
+                    </div>
+
+                    <div>
+
+                        <span>Pending</span>
+
+                        <strong id="pendingApplications">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card approved-card">
+
+                    <div class="stat-icon">
+                        ✅
+                    </div>
+
+                    <div>
+
+                        <span>Approved</span>
+
+                        <strong id="approvedApplications">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card rejected-card">
+
+                    <div class="stat-icon">
+                        ❌
+                    </div>
+
+                    <div>
+
+                        <span>Rejected</span>
+
+                        <strong id="rejectedApplications">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- APPLICATION LEVELS -->
+
+            <section class="level-section">
+
+                <div class="level-card">
+
+                    <span>Grade 8 Applications</span>
+
+                    <strong id="grade8Applications">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="level-card">
+
+                    <span>Form 4 Applications</span>
+
+                    <strong id="form4Applications">
+                        0
+                    </strong>
+
+                </div>
+
+            </section>
+
+
+            <!-- APPLICATIONS -->
+
+            <section
+                class="applications-section"
+                id="applications">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>Applications</h2>
+
+                        <p>
+                            Manage student applications
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="refreshApplications"
+                        class="refresh-button">
+
+                        🔄 Refresh
+
+                    </button>
+
+                </div>
+
+
+                <!-- SEARCH -->
+
+                <div class="application-tools">
+
+                    <input
+                        type="text"
+                        id="applicationSearch"
+                        placeholder="Search student or application ID...">
+
+
+                    <select id="statusFilter">
+
+                        <option value="all">
+                            All Status
+                        </option>
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                        <option value="Approved">
+                            Approved
+                        </option>
+
+                        <option value="Rejected">
+                            Rejected
+                        </option>
+
+                    </select>
+
+
+                    <select id="levelFilter">
+
+                        <option value="all">
+                            All Levels
+                        </option>
+
+                        <option value="Grade 8">
+                            Grade 8
+                        </option>
+
+                        <option value="Form 4">
+                            Form 4
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- TABLE -->
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Application ID
+                                </th>
+
+                                <th>
+                                    Student
+                                </th>
+
+                                <th>
+                                    Level
+                                </th>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="applicationsTableBody">
+
+                            <tr>
+
+                                <td colspan="6">
+
+                                    <div class="empty-state">
+
+                                        <span>📋</span>
+
+                                        <p>
+                                            No applications loaded yet.
+                                        </p>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+            <section class="admin-section" id="pending">
+    <h2>Pending Applications</h2>
+    <p>Pending applications will appear here.</p>
+</section>
+
+<!-- ==========================================
+     CONTACT MESSAGES
+     ========================================== -->
+
+<section
+    class="messages-section"
+    id="messages">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>📩 Contact Messages</h2>
+
+            <p>
+                Messages received from the school website
+            </p>
+
+        </div>
+
+        <button
+            id="refreshMessages"
+            class="refresh-button">
+
+            🔄 Refresh
+
+        </button>
+
+    </div>
+
+
+    <!-- MESSAGE SEARCH -->
+
+    <div class="application-tools">
+
+        <input
+            type="text"
+            id="messageSearch"
+            placeholder="Search messages...">
+
+        <select id="messageStatusFilter">
+
+            <option value="all">
+                All Messages
+            </option>
+
+            <option value="New">
+                New
+            </option>
+
+            <option value="Read">
+                Read
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <!-- MESSAGES TABLE -->
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Date</th>
+
+                    <th>Name</th>
+
+                    <th>Email</th>
+
+                    <th>Subject</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="messagesTableBody">
+
+                <tr>
+
+                    <td colspan="6">
+
+                        <div class="empty-state">
+
+                            <span>📩</span>
+
+                            <p>
+                                No messages loaded yet.
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+     MESSAGE DETAILS
+     ========================================== -->
+
+<section
+    class="message-details"
+    id="messageDetails"
+    style="display: none;">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>Message Details</h2>
+
+            <p id="messageDetailsDate">
+                Message
+            </p>
+
+        </div>
+
+
+        <button
+            id="closeMessageDetails"
+            class="close-button">
+
+            ✕ Close
+
+        </button>
+
+    </div>
+
+
+    <div class="details-grid">
+
+        <div class="detail-item">
+
+            <span>Name</span>
+
+            <strong id="messageDetailName">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+            <span>Email</span>
+
+            <strong id="messageDetailEmail">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="detail-item">
+
+            <span>Subject</span>
+
+            <strong id="messageDetailSubject">
+                —
+            </strong>
+
+        </div>
+
+
+        <div class="detail-item full-width">
+
+            <span>Message</span>
+
+            <strong
+                id="messageDetailMessage"
+                style="white-space: pre-wrap;">
+
+                —
+
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <div class="status-section">
+
+        <label for="messageStatus">
+
+            Message Status
+
+        </label>
+
+
+        <select id="messageStatus">
+
+            <option value="New">
+                New
+            </option>
+
+            <option value="Read">
+                Read
+            </option>
+
+        </select>
+
+
+        <button
+            id="saveMessageStatus"
+            class="save-button">
+
+            Save Status
+
+        </button>
+
+    </div>
+
+</section>
+
+<section class="admin-section" id="approved">
+    <h2>Approved Applications</h2>
+    <p>Approved applications will appear here.</p>
+</section>
+
+<section class="admin-section" id="rejected">
+    <h2>Rejected Applications</h2>
+    <p>Rejected applications will appear here.</p>
+</section>
+
+<section class="admin-section" id="settings">
+    <h2>Settings</h2>
+    <p>Administration settings will appear here.</p>
+</section>
+
+            <!-- APPLICANT DETAILS -->
+
+            <section
+                class="applicant-details"
+                id="applicantDetails"
+                style="display: none;">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h2>Applicant Details</h2>
+
+                        <p id="detailsApplicationID">
+                            Application
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="closeDetails"
+                        class="close-button">
+
+                        ✕ Close
+
+                    </button>
+
+                </div>
+
+
+                <div class="details-grid">
+
+                    <div class="detail-item">
+
+                        <span>Student Name</span>
+
+                        <strong id="detailStudentName">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span>Date of Birth</span>
+
+                        <strong id="detailDOB">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span>Gender</span>
+
+                        <strong id="detailGender">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span>Application Level</span>
+
+                        <strong id="detailLevel">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span>Current School</span>
+
+                        <strong id="detailSchool">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span>Parent / Guardian</span>
+
+                        <strong id="detailParent">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span>Phone</span>
+
+                        <strong id="detailPhone">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span>Email</span>
+
+                        <strong id="detailEmail">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-item full-width">
+
+                        <span>Home Address</span>
+
+                        <strong id="detailAddress">
+                            —
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DOCUMENTS -->
+
+                <div class="documents-section">
+
+                    <h3>Documents</h3>
+
+                    <div class="document-buttons">
+
+                        <a
+                            id="reportLink"
+                            href="#"
+                            target="_blank"
+                            class="document-button">
+
+                            📄 School Report
+
+                        </a>
+
+
+                        <a
+                            id="birthCertificateLink"
+                            href="#"
+                            target="_blank"
+                            class="document-button">
+
+                            📜 Birth Certificate
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="status-section">
+
+                    <label for="applicationStatus">
+                        Application Status
+                    </label>
+
+
+                    <select id="applicationStatus">
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                        <option value="Approved">
+                            Approved
+                        </option>
+
+                        <option value="Rejected">
+                            Rejected
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        id="saveStatus"
+                        class="save-button">
+
+                        Save Status
+
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- ==========================================
+     SETTINGS
+     ========================================== --><section
+    class="settings-section"
+    id="settings"
+    style="display: none;"><div class="section-header">
+
+    <div>
+
+        <h2>Settings</h2>
+
+        <p>
+            Manage administration preferences
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- STAFF ACCOUNT -->
+
+<div class="settings-card">
+
+    <h3>👤 Staff Account</h3>
+
+    <div class="settings-row">
+
+        <span>Username</span>
+
+        <strong id="settingsUsername">
+            Administrator
+        </strong>
+
+    </div>
+
+    <div class="settings-row">
+
+        <span>Role</span>
+
+        <strong>
+            School Staff
+        </strong>
+
+    </div>
+
+</div>
+
+
+<!-- SCHOOL INFORMATION -->
+
+<div class="settings-card">
+
+    <h3>🏫 School Information</h3>
+
+    <div class="settings-row">
+
+        <span>School</span>
+
+        <strong>
+            Mkhondvo High School
+        </strong>
+
+    </div>
+
+    <div class="settings-row">
+
+        <span>System</span>
+
+        <strong>
+            Administration Portal
+        </strong>
+
+    </div>
+
+</div>
+
+
+<!-- SYSTEM -->
+
+<div class="settings-card">
+
+    <h3>⚙️ System</h3>
+
+    <div class="settings-row">
+
+        <span>Application Data</span>
+
+        <button
+            id="settingsRefresh"
+            class="settings-button">
+
+            🔄 Refresh Data
+
+        </button>
+
+    </div>
+
+    <div class="settings-row">
+
+        <span>Current Session</span>
+
+        <strong id="sessionStatus">
+            Active
+        </strong>
+
+    </div>
+
+</div>
+
+
+<!-- LOGOUT -->
+
+<div class="settings-card danger-card">
+
+    <h3>🚪 Session</h3>
+
+    <p>
+        Sign out of the Mkhondvo High School
+        administration system.
+    </p>
+
+    <button
+        id="settingsLogout"
+        class="settings-danger-button">
+
+        Logout
+
+    </button>
+
+</div>
+
+</section>
+
+        </main>
+
+    </div>
+
+
+    <!-- DASHBOARD JAVASCRIPT -->
+
+    <script src="./js/dashboard.js"></script>
+
+</body>
+
+</html>

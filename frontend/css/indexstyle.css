@@ -1,0 +1,178 @@
+﻿*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f7fa;
+color:#333;
+}
+
+header{
+	background: #003366;
+	color: white;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 8%;
+	flex-wrap: wrap;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:15px;
+}
+
+.logo img{
+width:70px;
+height:70px;
+border-radius:50%;
+background:white;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:20px;
+flex-wrap:wrap;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-weight:500;
+transition:.3s;
+}
+
+nav a:hover,
+.active{
+color:gold;
+}
+
+.hero{
+height:80vh;
+background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+url("../images/logo.jpg") center/cover;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+padding:20px;
+}
+
+.hero h2{
+font-size:50px;
+margin-bottom:15px;
+}
+
+.hero p{
+font-size:20px;
+max-width:700px;
+margin:auto;
+}
+
+.btn{
+display:inline-block;
+margin-top:25px;
+padding:15px 35px;
+background:gold;
+color:#003366;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+}
+
+.quick-links{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+padding:60px 8%;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:12px;
+text-align:center;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+}
+
+.card h3{
+color:#003366;
+margin-bottom:15px;
+}
+
+.card a{
+display:inline-block;
+margin-top:15px;
+text-decoration:none;
+color:#00509d;
+font-weight:bold;
+}
+
+.about{
+padding:60px 10%;
+text-align:center;
+background:white;
+}
+
+.about h2{
+color:#003366;
+margin-bottom:20px;
+}
+
+.about p{
+line-height:1.8;
+font-size:18px;
+}
+
+.statistics{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+padding:60px 8%;
+background:#003366;
+color:white;
+text-align:center;
+}
+
+.stat h2{
+font-size:40px;
+color:gold;
+}
+
+footer{
+background:#001f4d;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+@media(max-width:768px){
+
+header{
+flex-direction:column;
+}
+
+nav ul{
+justify-content:center;
+margin-top:20px;
+}
+
+.hero h2{
+font-size:35px;
+}
+
+.hero p{
+font-size:17px;
+}
+
+}

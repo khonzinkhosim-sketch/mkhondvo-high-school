@@ -1,0 +1,1020 @@
+﻿/* =========================================
+   MKHONDVO HIGH SCHOOL
+   ADMIN DASHBOARD
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f3f6f9;
+    color: #1f2937;
+}
+
+
+/* =========================================
+   MAIN LAYOUT
+   ========================================= */
+
+.admin-layout {
+    min-height: 100vh;
+    display: flex;
+}
+
+
+/* =========================================
+   SIDEBAR
+   ========================================= */
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    padding: 25px 18px;
+
+    background: linear-gradient(
+        180deg,
+        #063452,
+        #08739a
+    );
+
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* SCHOOL LOGO */
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 5px 5px 25px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.2);
+}
+
+.sidebar-header img {
+    width: 55px;
+    height: 55px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 3px solid #f4b400;
+}
+
+.sidebar-header h2 {
+    font-size: 17px;
+    line-height: 1.2;
+}
+
+.sidebar-header span {
+    display: block;
+
+    margin-top: 5px;
+
+    font-size: 11px;
+
+    color: #f4b400;
+}
+
+
+/* =========================================
+   NAVIGATION
+   ========================================= */
+
+.admin-nav {
+    margin-top: 25px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.nav-link {
+    display: block;
+
+    padding: 13px 15px;
+
+    border-radius: 8px;
+
+    color: rgba(255,255,255,0.85);
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.nav-link:hover {
+    background: rgba(255,255,255,0.12);
+
+    color: white;
+}
+
+.nav-link.active {
+    background: rgba(255,255,255,0.15);
+
+    color: white;
+
+    border-left: 4px solid #f4b400;
+}
+
+
+/* =========================================
+   LOGOUT
+   ========================================= */
+
+.logout-button {
+    margin-top: auto;
+
+    padding: 13px;
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: white;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+.logout-button:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+
+/* =========================================
+   MAIN AREA
+   ========================================= */
+
+.admin-main {
+    width: calc(100% - 250px);
+
+    margin-left: 250px;
+
+    padding: 30px;
+}
+
+
+/* =========================================
+   TOP BAR
+   ========================================= */
+
+.admin-topbar {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.admin-topbar h1 {
+    color: #063452;
+
+    font-size: 29px;
+}
+
+.admin-topbar p {
+    margin-top: 6px;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+/* ADMIN USER */
+
+.admin-user {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.user-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e5f1f6;
+}
+
+.admin-user strong {
+    display: block;
+
+    color: #063452;
+
+    font-size: 13px;
+}
+
+.admin-user span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   STATISTICS
+   ========================================= */
+
+.statistics-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: white;
+
+    padding: 22px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,0.06);
+
+    border-left: 4px solid #08739a;
+}
+
+.stat-card.pending-card {
+    border-left-color: #f4b400;
+}
+
+.stat-card.approved-card {
+    border-left-color: #159447;
+}
+
+.stat-card.rejected-card {
+    border-left-color: #c62828;
+}
+
+.stat-icon {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #edf5f8;
+
+    font-size: 20px;
+}
+
+.stat-card span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 12px;
+
+    margin-bottom: 6px;
+}
+
+.stat-card strong {
+    font-size: 25px;
+
+    color: #063452;
+}
+
+
+/* =========================================
+   LEVEL CARDS
+   ========================================= */
+
+.level-section {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+
+    margin-bottom: 25px;
+}
+
+.level-card {
+    padding: 22px;
+
+    border-radius: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #063452,
+        #08739a
+    );
+
+    color: white;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+.level-card strong {
+    color: #f4b400;
+
+    font-size: 27px;
+}
+
+
+/* =========================================
+   APPLICATION PANEL
+   ========================================= */
+
+.applications-section,
+.applicant-details {
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,0.06);
+}
+
+.section-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    color: #063452;
+
+    font-size: 21px;
+}
+
+.section-header p {
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.refresh-button,
+.close-button,
+.save-button {
+    padding: 10px 15px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.refresh-button {
+    background: #e5f1f6;
+
+    color: #063452;
+}
+
+.close-button {
+    background: #edf0f2;
+
+    color: #475569;
+}
+
+.save-button {
+    background: #063452;
+
+    color: white;
+}
+
+.save-button:hover {
+    background: #08739a;
+}
+
+
+/* =========================================
+   SEARCH
+   ========================================= */
+
+.application-tools {
+    display: grid;
+
+    grid-template-columns:
+        1fr 180px 180px;
+
+    gap: 12px;
+
+    margin-bottom: 20px;
+}
+
+.application-tools input,
+.application-tools select,
+.status-section select {
+    padding: 12px;
+
+    border: 1px solid #dbe2e8;
+
+    border-radius: 8px;
+
+    background: #f8fafc;
+
+    outline: none;
+}
+
+.application-tools input:focus,
+.application-tools select:focus {
+    border-color: #08739a;
+}
+
+
+/* =========================================
+   TABLE
+   ========================================= */
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 700px;
+}
+
+th {
+    padding: 13px;
+
+    background: #f1f6f8;
+
+    color: #475569;
+
+    text-align: left;
+
+    font-size: 12px;
+}
+
+td {
+    padding: 14px 13px;
+
+    border-bottom:
+        1px solid #edf1f4;
+
+    font-size: 13px;
+}
+
+tr:hover td {
+    background: #fafcfd;
+}
+
+
+/* =========================================
+   EMPTY STATE
+   ========================================= */
+
+.empty-state {
+    padding: 40px;
+
+    text-align: center;
+
+    color: #94a3b8;
+}
+
+.empty-state span {
+    display: block;
+
+    font-size: 30px;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================================
+   APPLICANT DETAILS
+   ========================================= */
+
+.applicant-details {
+    margin-top: 25px;
+}
+
+.details-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 15px;
+}
+
+.detail-item {
+    padding: 15px;
+
+    background: #f8fafc;
+
+    border-radius: 8px;
+}
+
+.detail-item span {
+    display: block;
+
+    color: #64748b;
+
+    font-size: 11px;
+
+    margin-bottom: 5px;
+}
+
+.detail-item strong {
+    color: #063452;
+
+    font-size: 14px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+
+/* =========================================
+   DOCUMENTS
+   ========================================= */
+
+.documents-section {
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+.documents-section h3 {
+    color: #063452;
+
+    margin-bottom: 12px;
+}
+
+.document-buttons {
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.document-button {
+    padding: 10px 14px;
+
+    background: #e5f1f6;
+
+    color: #063452;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   STATUS
+   ========================================= */
+
+.status-section {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+.status-section label {
+    color: #063452;
+
+    font-weight: 600;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .statistics-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .application-tools {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .sidebar {
+        position: relative;
+
+        width: 100%;
+
+        min-height: auto;
+    }
+
+    .admin-layout {
+        display: block;
+    }
+
+    .admin-main {
+        width: 100%;
+
+        margin-left: 0;
+
+        padding: 18px;
+    }
+
+    .statistics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .level-section {
+        grid-template-columns: 1fr;
+    }
+
+    .application-tools {
+        grid-template-columns: 1fr;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full-width {
+        grid-column: auto;
+    }
+
+}
+
+/* =========================================
+ADMIN DASHBOARD SECTIONS
+========================================= */
+
+.admin-section {
+display: none;
+background: white;
+border-radius: 15px;
+padding: 25px;
+box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+margin-top: 25px;
+}
+
+.admin-section.active {
+display: block;
+}
+
+.admin-section h2 {
+color: #063452;
+font-size: 21px;
+margin-bottom: 8px;
+}
+
+.admin-section p {
+color: #64748b;
+font-size: 13px;
+}
+
+/* =========================================
+ACTIVE SECTION
+========================================= */
+
+.dashboard-section {
+display: block;
+}
+
+.dashboard-section.hidden {
+display: none;
+}
+
+/* =========================================
+APPLICATION VIEW BUTTON
+========================================= */
+
+.view-button {
+padding: 7px 12px;
+
+border: none;
+
+border-radius: 6px;
+
+background: #063452;
+
+color: white;
+
+cursor: pointer;
+
+font-size: 12px;
+
+font-weight: 600;
+
+}
+
+.view-button:hover {
+background: #08739a;
+}
+
+/* =========================================
+SETTINGS
+========================================= */
+
+.settings-section {
+background: transparent;
+margin-top: 25px;
+}
+
+.settings-card {
+background: white;
+
+border-radius: 15px;
+
+padding: 22px;
+
+margin-bottom: 18px;
+
+box-shadow:
+    0 5px 18px rgba(0,0,0,0.06);
+
+}
+
+.settings-card h3 {
+color: #063452;
+
+font-size: 16px;
+
+margin-bottom: 18px;
+
+}
+
+.settings-row {
+display: flex;
+
+justify-content: space-between;
+
+align-items: center;
+
+padding: 14px 0;
+
+border-top: 1px solid #edf1f4;
+
+}
+
+.settings-row:first-of-type {
+border-top: none;
+}
+
+.settings-row span {
+color: #64748b;
+
+font-size: 13px;
+
+}
+
+.settings-row strong {
+color: #063452;
+
+font-size: 13px;
+
+}
+
+.settings-button {
+padding: 9px 14px;
+
+border: none;
+
+border-radius: 7px;
+
+background: #e5f1f6;
+
+color: #063452;
+
+cursor: pointer;
+
+font-weight: 600;
+
+}
+
+.settings-button:hover {
+background: #d5e9f0;
+}
+
+.danger-card {
+border-left: 4px solid #c62828;
+}
+
+.danger-card p {
+color: #64748b;
+
+font-size: 13px;
+
+margin-bottom: 15px;
+
+}
+
+.settings-danger-button {
+padding: 10px 16px;
+
+border: none;
+
+border-radius: 8px;
+
+background: #c62828;
+
+color: white;
+
+cursor: pointer;
+
+font-weight: 600;
+
+}
+
+.settings-danger-button:hover {
+background: #a51f1f;
+}
+
+/* MOBILE SETTINGS */
+
+@media (max-width: 650px) {
+
+.settings-row {
+    align-items: flex-start;
+
+    gap: 15px;
+
+    flex-direction: column;
+}
+
+}
+
+/* =========================================
+   CONTACT MESSAGES
+   ========================================= */
+
+.messages-section,
+.message-details {
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    margin-top: 25px;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,0.06);
+}
+
+
+/* MESSAGE BADGE */
+
+.message-badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 20px;
+
+    height: 20px;
+
+    padding: 0 6px;
+
+    margin-left: 6px;
+
+    border-radius: 10px;
+
+    background: #c62828;
+
+    color: white;
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+
+/* MESSAGE ROW */
+
+.message-new td {
+    font-weight: 600;
+}
+
+
+/* MESSAGE BUTTON */
+
+.view-message-button {
+    padding: 7px 12px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #e5f1f6;
+
+    color: #063452;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.view-message-button:hover {
+    background: #08739a;
+
+    color: white;
+}
+
+
+/* MESSAGE TEXT */
+
+#messageDetailMessage {
+    display: block;
+
+    line-height: 1.6;
+
+    font-weight: normal;
+}
