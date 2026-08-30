@@ -3,7 +3,7 @@
 // STAFF ADMIN DASHBOARD
 // ==========================================
 
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://mkhondvo-high-school.onrender.com";
 
 let applications = [];
 let selectedApplication = null;
