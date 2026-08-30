@@ -144,7 +144,7 @@ def update_application_status(
 # CONTACT MESSAGES
 # ==========================================
 
-def get_messages():
+def get_contact_messages():
 
     worksheet = get_worksheet(
         MESSAGES_WORKSHEET

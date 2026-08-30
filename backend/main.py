@@ -4,10 +4,6 @@ from pydantic import BaseModel
 
 from google_sheets import (
     get_applications,
-    update_application_status
-)
-from google_sheets import (
-    get_applications,
     update_application_status,
     get_contact_messages,
     update_message_status
