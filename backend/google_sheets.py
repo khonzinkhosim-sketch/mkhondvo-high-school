@@ -1,74 +1,81 @@
+import json
+import os
+
 import gspread
 from google.oauth2.service_account import Credentials
 
 
 # ==========================================
 # MKHONDVO HIGH SCHOOL
-# GOOGLE SHEETS CONNECTION
+# GOOGLE SHEETS SERVICE
 # ==========================================
 
-CREDENTIALS_FILE = "credentials.json"
-
-SPREADSHEET_ID = (
-    "1iA3pq-XlNhYjw7SxLEMyVpVS-Pt7W0v6RvIVT1ibqJ0"
-)
+SPREADSHEET_ID = "1iA3pq-XlNhYjw7SxLEMyVpVS-Pt7W0v6RvIVT1ibqJ0"
 
 APPLICATIONS_WORKSHEET = "Applications"
 MESSAGES_WORKSHEET = "Contact Messages"
 
+SCOPES = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive",
+]
+
 
 # ==========================================
-# GOOGLE SHEETS CLIENT
+# GOOGLE CLIENT
 # ==========================================
 
-def get_client():
+def get_google_client():
 
-    scopes = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive"
-    ]
+    credentials_json = os.getenv("GOOGLE_CREDENTIALS_JSON")
 
-    credentials = Credentials.from_service_account_file(
-        CREDENTIALS_FILE,
-        scopes=scopes
+    if not credentials_json:
+        raise RuntimeError(
+            "GOOGLE_CREDENTIALS_JSON environment variable is not configured."
+        )
+
+    try:
+        credentials_info = json.loads(credentials_json)
+
+    except json.JSONDecodeError as error:
+        raise RuntimeError(
+            "GOOGLE_CREDENTIALS_JSON contains invalid JSON."
+        ) from error
+
+    credentials = Credentials.from_service_account_info(
+        credentials_info,
+        scopes=SCOPES
     )
 
     return gspread.authorize(credentials)
 
 
 # ==========================================
-# OPEN SPREADSHEET
+# GET WORKSHEET
 # ==========================================
 
-def get_spreadsheet():
+def get_worksheet(worksheet_name):
 
-    client = get_client()
+    client = get_google_client()
 
-    return client.open_by_key(
+    spreadsheet = client.open_by_key(
         SPREADSHEET_ID
     )
 
-
-# ==========================================
-# APPLICATIONS WORKSHEET
-# ==========================================
-
-def get_worksheet():
-
-    spreadsheet = get_spreadsheet()
-
     return spreadsheet.worksheet(
-        APPLICATIONS_WORKSHEET
+        worksheet_name
     )
 
 
 # ==========================================
-# GET APPLICATIONS
+# APPLICATIONS
 # ==========================================
 
 def get_applications():
 
-    worksheet = get_worksheet()
+    worksheet = get_worksheet(
+        APPLICATIONS_WORKSHEET
+    )
 
     return worksheet.get_all_records()
 
@@ -82,12 +89,13 @@ def update_application_status(
     new_status
 ):
 
-    worksheet = get_worksheet()
+    worksheet = get_worksheet(
+        APPLICATIONS_WORKSHEET
+    )
 
     records = worksheet.get_all_records()
 
     headers = worksheet.row_values(1)
-
 
     if "Application ID" not in headers:
 
@@ -95,18 +103,15 @@ def update_application_status(
             "Application ID column was not found."
         )
 
-
     if "Status" not in headers:
 
         raise ValueError(
             "Status column was not found."
         )
 
-
     status_column = (
         headers.index("Status") + 1
     )
-
 
     for row_number, record in enumerate(
         records,
@@ -120,7 +125,6 @@ def update_application_status(
             )
         ).strip()
 
-
         if current_id == str(
             application_id
         ).strip():
@@ -133,30 +137,18 @@ def update_application_status(
 
             return True
 
-
     return False
 
 
 # ==========================================
-# CONTACT MESSAGES WORKSHEET
+# CONTACT MESSAGES
 # ==========================================
 
-def get_messages_worksheet():
+def get_messages():
 
-    spreadsheet = get_spreadsheet()
-
-    return spreadsheet.worksheet(
+    worksheet = get_worksheet(
         MESSAGES_WORKSHEET
     )
-
-
-# ==========================================
-# GET CONTACT MESSAGES
-# ==========================================
-
-def get_contact_messages():
-
-    worksheet = get_messages_worksheet()
 
     return worksheet.get_all_records()
 
@@ -166,41 +158,30 @@ def get_contact_messages():
 # ==========================================
 
 def update_message_status(
-    message_row,
+    row_number,
     new_status
 ):
 
-    worksheet = get_messages_worksheet()
+    worksheet = get_worksheet(
+        MESSAGES_WORKSHEET
+    )
 
     headers = worksheet.row_values(1)
-
 
     if "Status" not in headers:
 
         raise ValueError(
-            "Status column was not found "
-            "in Contact Messages."
+            "Status column was not found."
         )
-
 
     status_column = (
         headers.index("Status") + 1
     )
-
-
-    row_number = int(message_row)
-
-
-    if row_number < 2:
-
-        return False
-
 
     worksheet.update_cell(
         row_number,
         status_column,
         new_status
     )
-
 
     return True
